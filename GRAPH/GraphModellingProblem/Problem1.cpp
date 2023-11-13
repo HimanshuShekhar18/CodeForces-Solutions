@@ -80,7 +80,7 @@ for(auto it: graph[s.vertex]){
 
 int res = INF;
 for(int i = 0; i<=C; i++){
-    res = min(INF,dist[n-1][i]);
+    res = min(res,dist[n-1][i]);
 }
 
 return res;
@@ -206,8 +206,6 @@ struct st{
 // Time Complexity: O(n*(C+1))
 int dijkstra(){
 
-    // initializing a 2D-array
-    fill(&dist[0][0],&dist[0][0]+(MAX_N*55),INF);
     priority_queue<st,vector<st>,greater<st>> pq;
     pq.push(st(0,C,0));   // vertex,remainingfuel,dollar
 
@@ -218,8 +216,8 @@ int dijkstra(){
 
     // this check just working as visited array check for node with state v and c.
     // TLE nahi aayenga
-if (dist[s.vertex][s.fuel] < s.dollar) continue;
-dist[s.vertex][s.fuel]=s.dollar;
+if (dist[s.vertex].find(s.fuel) != dist[s.vertex].end() && dist[s.vertex][s.fuel] < s.dollar) continue;
+        dist[s.vertex][s.fuel] = s.dollar;
 
 // adjacent vertex
 for(auto it: graph[s.vertex]){
@@ -240,7 +238,9 @@ for(auto it: graph[s.vertex]){
 
 int res = INF;
 for(int i = 0; i<=C; i++){
-    res = min(INF,dist[n-1][i]);
+    if (dist[n - 1].find(i) != dist[n - 1].end()) {
+            res = min(res, dist[n - 1][i]);
+        }
 }
 
 return res;
