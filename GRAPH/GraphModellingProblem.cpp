@@ -25,7 +25,7 @@ const int MAX_N = 100000+15;
 
 vector<pair<int,int>> graph[MAX_N];
 int dist[MAX_N][55];   // dist[vertex][feul]
-int n,m,C;
+int n,m,C;   // C --> Limit Fuel
 int cost[MAX_N];
 
 // defining the graph state for each node;
